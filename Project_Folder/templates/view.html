@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Order</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ff9500;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .search-box input[type="text"],
+        .search-box input[type="number"] {
+            height: 40px;
+            width: 100%;
+            padding: 0 10px;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-box input[type="number"] {
+            margin-top: 10px;
+        }
+
+        .search-box button[type="submit"] {
+            position: absolute;
+            bottom: -50px;
+            right: 14rem;
+            height: 40px;
+            width: 40px;
+            border: none;
+            background-color: #fc8019;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-box button[type="submit"]:hover {
+            background-color: #fa6b00;
+        }
+
+        .icon{
+            left: 5px;
+        }
+
+        .search-box input[type="text"]::placeholder,
+        .search-box input[type="number"]::placeholder {
+            color: #888;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-box">
+          <form action="/view-order" method="POST">
+            <input type="text" name="cus_name" placeholder="Enter your Name" required>
+            <input type="number" name="mobile_no"  required placeholder="Enter Mobile Number">
+            <button type="submit"><i class="fa-solid fa-arrow-right fa-bounce fa-xl  icon" ></i></button>
+          </form>
+        </div>
+      </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const mobileNum = document.querySelector('input[name="mobile_no"]').value;
+        const regex = /^(?:(?:\+|0{0,2})91(\s*|[\-])?|[0]?)?([6789]\d{2}([ -]?)\d{3}([ -]?)\d{4})$/;
+        if (!regex.test(mobileNum)) {
+            alert("Not a valid mobile number!");
+        } else {
+            this.submit();
+        }
+    });
+    </script>
+</body>
+
+</html>

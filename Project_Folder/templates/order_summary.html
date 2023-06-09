@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order summary</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+      body {
+        padding: 20px;
+        background-color: #e69100;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #343a40;
+      }
+      table {
+        width: 100%;
+        margin-bottom: 20px;
+        background-color: #ff9500;
+        border-collapse: collapse;
+        overflow-x: auto;
+      }
+      th, td {
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid #dee2e6;
+      }
+      th {
+        font-weight: bold;
+        background-color: #f2f2f2;
+      }
+      .total {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: right;
+        color: #343a40;
+      }
+      .btn {
+        padding: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+      }
+      .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+      }
+      .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+      }
+      .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+      }
+      .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+      }
+      
+      /* Mobile-first styles */
+      @media (min-width: 576px) {
+        body {
+          padding: 30px;
+        }
+        h1 {
+          font-size: 3rem;
+          margin-bottom: 30px;
+        }
+        table {
+          margin-bottom: 30px;
+        }
+      }
+      
+      /* Tablet and up styles */
+      @media (min-width: 768px) {
+        body {
+          padding: 40px;
+        }
+        h1 {
+          font-size: 4rem;
+          margin-bottom: 40px;
+        }
+        table {
+          margin-bottom: 40px;
+        }
+      }
+      
+      /* Desktop and up styles */
+      @media (min-width: 992px) {
+        body {
+          padding: 50px;
+        }
+        h1 {
+          font-size: 5rem;
+          margin-bottom: 50px;
+        }
+        table {
+          margin-bottom: 50px;
+        }
+      }
+    </style>>
+
+
+  </head>
+  <body>
+
+    <div class="container">
+      <h1>Order Summary</h1>
+      <p>Missed anything <button><a href="/">Click Here</a></button>To Order again.</p>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Table No</th>
+          <th>Name</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Ordered Time</th>
+          <th>Status</th>
+        </tr>
+        {% for order in orders %}
+          <tr>
+            <td>{{ order['id'] }}</td>
+            <td>{{ order['Table_No'] }}</td>
+            <td>{{ order['Name'] }}</td>
+            <td>{{ order['Items'] }}</td>
+            <td>₹{{ order['Total'] }}</td>
+            <td>{{ order['Ordered_time'] }}</td>
+            <td>{{ order['Status'] }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="container">
+      <h1>Previous Orders</h1>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Table No</th>
+          <th>Name</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Ordered Time</th>
+          <th>Status</th>
+          <th>Review</th>
+        </tr>
+        {% for order in prev_ord_list %}
+          <tr>
+            <td>{{ order['id'] }}</td>
+            <td>{{ order['Table_No'] }}</td>
+            <td>{{ order['Name'] }}</td>
+            <td>{{ order['Items'] }}</td>
+            <td>₹{{ order['Total'] }}</td>
+            <td>{{ order['Ordered_time'] }}</td>
+            <td>{{ order['Status'] }}</td>
+            <td>{% if order['Order_Review'] == '' %}
+                   <div id="myElement">Provide us your feedback for order id:{{ order['id'] }}</div>
+                   <button onclick="changeToForm()">Click Here</button>
+                {% else %}
+                  {{ order['Order_Review'] }}
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <script src="{{ url_for('static', filename='order.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Order Menu</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+<body>
+    <h1 class="shop_name">Coastal Kitchen</h1>
+    <form action="/order" method="POST">
+        <div class="table_info">
+            <input type="text" name="customer_name" id="name" required placeholder="Enter Your Name">
+            <label for="customer_name"></label>
+        </div>
+        <div class="table_info">
+            <input type="number" name="mobile_no" class="no" required placeholder="Enter Mobile Number">
+            <label for="table_no"></label>
+        </div>
+        <!--<div class="table_info">
+            <input type="number" name="table_no" class="no" required placeholder="Enter Table Number">
+            <label for="table_no"></label>
+        </div></!-->
+        <h1 class="instruction">NOTE : Please make sure that you checked the box before placing your order. If it is not checked, it won't be added to your purchase.</h1>
+        <div class="menu">
+            <div class="food-item card">
+                <img src="{{url_for('static' , filename='masala_dosa.avif')}}" alt="Masala Dosa">
+                <input type="checkbox" name="Masala_dosa" id="Masala_dosa">
+                <label for="Masala_dosa">
+                    <h2 class="item-name">Masala Dosa</h2>
+                    <p class="item-description">Serves 1 | An appetizing circular crisply fried dosa with a fragrant spiced mashed potato and onion filling, served with South Indian sambar and chutneys.</p>
+                    <p class="item-price">₹140</p>
+                </label>
+                <div class="quantity-control">
+                    <button type="button" class="decrement" data-target="Masala_dosa_quantity">&minus;</button>
+                    <input type="number" name="Masala_dosa_quantity" value="0" min="0" readonly class="my_qty">
+                    <button type="button" class="increment" data-target="Masala_dosa_quantity">&#43;</button>
+                </div>
+            </div>
+            <div class="food-item card">
+                <img src="{{url_for('static' , filename='Onion_Rava_Dosa.webp')}}" alt="Onion Rava Dosa">
+                <input type="checkbox" name="Onion_rava_dosa" id="Onion_rava_dosa">
+                <label for="Onion_rava_dosa">
+                    <h2 class="item-name">Onion Rava Dosa</h2>
+                    <p class="item-description">Serves 1 | A crisp fried dosa made of all-purpose flour, rice, and semolina batter topped with finely chopped onions, ginger, chilies, and coriander served with chutneys & sambar.</p>
+                    <p class="item-price">₹120</p>
+                </label>
+                <div class="quantity-control">
+                    <button type="button" class="decrement" data-target="Onion_rava_dosa_quantity">&minus;</button>
+                    <input type="number" name="Onion_rava_dosa_quantity" value="0" min="0" readonly class="my_qty">
+                    <button type="button" class="increment" data-target="Onion_rava_dosa_quantity">&#43;</button>
+                </div>
+            </div>
+            <div class="food-item card">
+                <img src="{{url_for('static' , filename='chola_poori.jpg')}}" alt="Chola Poori">
+                <input type="checkbox" name="chola_poori" id="chola_poori">
+                <label for="chola_poori">
+                    <h2 class="item-name">Chola Poori</h2>
+                    <p class="item-description">Serves 1 | A tasty traditional North Indian dish comprising of a massive soft puffed up deep-fried Poori along with spicy chickpea curry and an onion salad.</p>
+                    <p class="item-price">₹80</p>
+                </label>
+                <div class="quantity-control">
+                    <button type="button" class="decrement" data-target="chola_poori_quantity">&minus;</button>
+                    <input type="number" name="chola_poori_quantity" value="0" min="0" readonly class="my_qty">
+                    <button type="button" class="increment" data-target="chola_poori_quantity">&#43;</button>
+                </div>
+            </div>
+            <div class="food-item card">
+                <img src="{{url_for('static' , filename='chappati.jpg')}}" alt="Chappati">
+                <input type="checkbox" name="chappati" id="chappati">
+                <label for="chappati">
+                    <h2 class="item-name">Chappati(3pcs)</h2>
+                    <p class="item-description">High in fibre and protein, our whole wheat rotis are the perfect accompaniment for any meal. Enjoy 3 healthy and flavourful rotis today. - 100% whole wheat rotis Allergen Information: Contains gluten.</p>
+                    <p class="item-price">₹60</p>
+                </label>
+                <div class="quantity-control">
+                    <button type="button" class="decrement" data-target="chappati_quantity">&minus;</button>
+                    <input type="number" name="chappati_quantity" value="0" min="0" readonly class="my_qty">
+                    <button type="button" class="increment" data-target="chappati_quantity">&#43;</button>
+                </div>
+            </div>
+            <div class="food-item card">
+                <img src="{{url_for('static' , filename='pizza.jpg')}}" alt="Pizza">
+                <input type="checkbox" name="pizza" id="pizza">
+                <label for="pizza">
+                    <h2 class="item-name">Pizza</h2>
+                    <p class="item-description">A delicious italian style pizza cooked on firewood.</p>
+                    <p class="item-price">₹120</p>
+                </label>
+                <div class="quantity-control">
+                    <button type="button" class="decrement" data-target="pizza_quantity">&minus;</button>
+                    <input type="number" name="pizza_quantity" value="0" min="0" readonly class="my_qty">
+                    <button type="button" class="increment" data-target="pizza_quantity">&#43;</button>
+                </div>
+            </div>
+            <div class="food-item card">
+                <img src="{{url_for('static' , filename='burger.jpg')}}" alt="Burger">
+                <input type="checkbox" name="burger" id="burger">
+                <label for="burger">
+                    <h2 class="item-name">Burger</h2>
+                    <p class="item-description">Our signature Whopper with 7 layers between the buns. Flame Grilled chicken Patty, fresh onion, crispy lettuce, juicy tomatoes(seasonal), tangy gherkins, creamy and smoky sauces with xxl buns. It’s Not A Burger, it’s a Whopper.</p>
+                    <p class="item-price">₹180</p>
+                </label>
+                <div class="quantity-control">
+                    <button type="button" class="decrement" data-target="burger_quantity">&minus;</button>
+                    <input type="number" name="burger_quantity" value="0" min="0" readonly class="my_qty">
+                    <button type="button" class="increment" data-target="burger_quantity">&#43;</button>
+                </div>
+            </div>
+            <div class="food-item card">
+                <img src="{{url_for('static' , filename='fried_rice.jpg')}}" alt="Fried Rice">
+                <input type="checkbox" name="fried_rice" id="fried_rice">
+                <label for="fried_rice">
+                    <h2 class="item-name">Fried Rice</h2>
+                    <p class="item-description">Serves 1 | Fried rice is hot & spicy with bursting flavours of ginger, garlic, soya sauce & red chilli paste with beaten egg, chopped chicken & vegetables</p>
+                    <p class="item-price">₹140</p>
+                </label>
+                <div class="quantity-control">
+                    <button type="button" class="decrement" data-target="fried_rice_quantity">&minus;</button>
+                    <input type="number" name="fried_rice_quantity" value="0" min="0" readonly class="my_qty">
+                    <button type="button" class="increment" data-target="fried_rice_quantity">&#43;</button>
+                </div>
+            </div>
+            <div class="food-item card">
+                <img src="{{url_for('static' , filename='noodles.jfif')}}" alt="Noodles">
+                <input type="checkbox" name="noodles" id="noodles">
+                <label for="noodles ">
+                    <h2 class="item-name">Noodles</h2>
+                    <p class="item-description">Delectable noodles tossed along with assorted fresh veggies, chicken, Schezwan sauce and spices - perfect to satisfy your hunge</p>
+                    <p class="item-price">₹130</p></label>
+                <div class="quantity-control">
+                    <button type="button" class="decrement" data-target="noodles_quantity">&minus;</button>
+                    <input type="number" name="noodles_quantity" value="0" min="0" readonly class="my_qty">
+                    <button type="button" class="increment" data-target="noodles_quantity">&#43;</button>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="place_order">Place Order</button>
+    </form>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Order Summary</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+      body {
+        padding: 50px;
+        background-color: gray;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #343a40;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+      }
+      li {
+        margin-bottom: 10px;
+        background-color: #e69100;;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .item {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #343a40;
+      }
+      .qty {
+        font-size: 1rem;
+        color: white;
+      }
+      .total {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: right;
+        color: #343a40;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Order Summary</h1>
+      <h2>Table No: {{ table }}</h2>
+      <h3>Customer Name: {{ customer }}</h3>
+      <ul>
+        {% for item in items %}
+          <li>
+            <span class="item">{{ item[0] }}</span>
+            <span class="qty">x {{ item[1] }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      <div class="total">Total: ₹{{ total }}</div>
+    </div>
+  </body>
+</html>

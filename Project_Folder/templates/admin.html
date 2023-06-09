@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+      body {
+        padding: 50px;
+        background-color: #e69100;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-align: center;
+        color: #343a40;
+      }
+      table {
+        width: 100%;
+        margin-bottom: 30px;
+        background-color: #ff9500;
+        border-collapse: collapse;
+      }
+      th, td {
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid #dee2e6;
+      }
+      th {
+        font-weight: bold;
+        background-color: #f2f2f2;
+      }
+      .total {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: right;
+        color: #343a40;
+      }
+      .btn {
+        padding: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+      }
+      .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+      }
+      .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+      }
+      .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+      }
+      .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+      }
+      @media (max-width: 767px) {
+        body {
+          padding: 20px;
+        }
+        h1 {
+          font-size: 2rem;
+          margin-bottom: 20px;
+        }
+        table {
+          font-size: 0.9rem;
+          margin-bottom: 20px;
+        }
+        th, td {
+          padding: 8px;
+        }
+        .btn {
+          padding: 8px;
+          margin-right: 5px;
+        }
+      }
+      @media (min-width: 768px) and (max-width: 991px) {
+        body {
+          padding: 40px;
+        }
+        h1 {
+          font-size: 2.2rem;
+          margin-bottom: 25px;
+        }
+        table {
+          font-size: 1rem;
+          margin-bottom: 25px;
+        }
+        th, td {
+          padding: 10px;
+        }
+        .btn {
+          padding: 10px;
+          margin-right: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Orders</h1>
+      <table id="orders-table">
+        {% for order in lis %}
+          <tr>
+            <td>{{ order['id'] }}</td>
+            <td>{{ order['Table_No'] }}</td>
+            <td>{{ order['Name'] }}</td>
+            <td>{{ order['Items'] }}</td>
+            <td>₹{{ order['Total'] }}</td>
+            <td>{{ order['Ordered_time'] }}</td>
+            <td>{{ order['Status'] }}</td>
+            <td>
+              {% if order['Status'] == 'Pending' %}
+                <form action="/admin/{{ order['id'] }}/complete" method="post">
+                  <button type="submit" class="btn btn-success">Complete</button>
+                </form>
+                <form action="/admin/{{ order['id'] }}/cancel" method="post">
+                  <button type="submit" class="btn btn-danger">Cancel</button>
+                </form>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <script>
+    function updateOrdersTable() {
+      // Send an AJAX request to the server to get the updated data
+      fetch('/admin/data')
+        .then(response => response.json())
+        .then(data => {
+          // Update the content of the orders table with the new data
+          let table = document.querySelector('#orders-table');
+          let tbody = table.querySelector('tbody');
+          tbody.innerHTML = '';
+          let th = document.createElement('tr');
+          th.innerHTML = `
+            <th>ID</th>
+            <th>Table No</th>
+            <th>Customer Name</th>
+            <th>Items</th>
+            <th>Total</th>
+            <th>Ordered Time</th>
+            <th>Status</th>
+            <th>Action</th>`;
+
+          tbody.appendChild(th);
+
+          data.forEach(order => {
+            let tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td>${order.id}</td>
+              <td>${order.Table_No}</td>
+              <td>${order.Name}</td>
+              <td>${order.Items}</td>
+              <td>₹${order.Total}</td>
+              <td>${order.Ordered_time}</td>
+              <td>${order.Status}</td>
+              <td>
+                ${order.Status == 'Pending' ? `
+                  <form action="/admin/${order.id}/complete" method="post">
+                    <button type="submit" class="btn btn-success">Complete</button>
+                  </form>
+                  <form action="/admin/${order.id}/cancel" method="post">
+                    <button type="submit" class="btn btn-danger">Cancel</button>
+                  </form>
+                ` : ''}
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+        });
+    }
+    setInterval(updateOrdersTable , 5000);
+    </script>
+  </body>
+</html>

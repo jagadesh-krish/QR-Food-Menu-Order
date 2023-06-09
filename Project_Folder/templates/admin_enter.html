@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Order</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ff9500;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .search-box input[type="text"] {
+            height: 40px;
+            width: 100%;
+            padding: 0 10px;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-box button[type="submit"] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 40px;
+            width: 40px;
+            border: none;
+            background-color: #fc8019;
+            border-radius: 20px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            outline: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-box button[type="submit"]:hover {
+            background-color: #fa6b00;
+        }
+
+        .icon {
+            left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: antiquewhite;">{{ msg }}</h1>
+    <div class="container">
+        <div class="search-box">
+          <form action="/auth-admin" method="POST">
+            <input type="text" name="admin_pw" placeholder="Enter Password" required>
+            <button type="submit"><i class="fa-solid fa-arrow-right fa-bounce fa-xl  icon"></i></button>
+          </form>
+        </div>
+      </div>
+</body>
+
+</html>
